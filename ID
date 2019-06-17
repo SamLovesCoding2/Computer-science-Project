@@ -6,6 +6,8 @@ Player(),
 Trail(),
 FastEnemy(),
 SmartEnemy(),
+EnemyBoss(),
+
 BasicEnemy();
 
 
