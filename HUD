@@ -10,7 +10,7 @@ public class HUD {
 
 	private int score = 0;
 	private int level = 1;
-
+	
 	public void tick() {
 
 		HEALTH = (int) Game.clamp(HEALTH, 0, 100);
@@ -18,6 +18,11 @@ public class HUD {
 		greenValue = HEALTH * 2;
 
 		score++;
+		
+//		if(HEALTH<=0)
+//		{
+//			System.exit(1);
+//		}
 	}
 
 	public void render(Graphics g) {
