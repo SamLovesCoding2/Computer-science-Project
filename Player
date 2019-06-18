@@ -5,12 +5,14 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Random;
+private BufferedImage image;
 
 public class Player extends GameObject {
 
 	Random r = new Random();
 	Handler handler;
-
+	private BufferedImage image;
+	
 	public Player(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
@@ -44,9 +46,13 @@ collision();
 		}
 	}
 	public void render(Graphics g) {
-
-		g.setColor(Color.white);
-		g.fillRect((int)x, (int)y, 32, 32);
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/Ninja.png"));
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		g.drawImage(image,(int)x, (int)y,50,50,null);
 
 	}
 
