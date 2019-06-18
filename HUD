@@ -26,15 +26,20 @@ public class HUD {
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.DARK_GRAY);
+			g.setColor(Color.DARK_GRAY);
 		g.fillRect(15, 15, 200, 32);
-		g.setColor(new Color(75, (int)greenValue, 0));
+		g.setColor(new Color(75, (int) greenValue, 0));
 		g.fillRect(15, 15, (int) (2 * HEALTH), 32);
 		g.setColor(Color.WHITE);
 		g.drawRect(15, 15, 200, 32);
-
-		g.drawString("Score: " + score, 15, 64);
-		g.drawString("Level: " + level, 15, 80);
+		g.setColor(Color.GREEN);
+		int score1 = this.score;
+		g.setColor(Color.GREEN);
+		int level2 = this.level;
+		g.setColor(Color.GREEN);
+		g.drawString("score:  " + score1, 15, 64);
+		g.setColor(Color.GREEN);
+		g.drawString("level:  " + level2, 15, 80);
 	}
 
 	public void Score(int score) {
