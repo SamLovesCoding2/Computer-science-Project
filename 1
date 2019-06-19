@@ -1,0 +1,89 @@
+package ScifiGame;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class MouseInput implements MouseListener {
+
+	private Handler handler;
+	private int curX;
+	private int curY;
+	private int delX;
+	private int delY;
+	private int newX;
+	private int newY;
+	private GameObject player;
+
+	public MouseInput(Handler hnadler) {
+		this.handler = handler;
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		newX = e.getLocationOnScreen().x;
+		newY = e.getLocationOnScreen().y;
+
+
+
+		PlayerBullet p = new PlayerBullet((int)player.getX() + 10, (int)player.getY() + 10, ID.PlayerBullet,handler);
+		handler.addObject(p);
+		for (int i = 0; i < handler.object.size(); i++) {
+
+			GameObject tempObject = handler.object.get(i);
+
+			if (tempObject.getId() == ID.PlayerBullet) {
+				tempObject.setX(newX);
+				tempObject.setY(newY);
+			}
+
+		}
+	}
+
+	public int getnewX() {
+		return newX;
+	}
+
+	public int getnewY() {
+		return newY;
+	}
+	public int getdelX() {
+		return delX;
+	}
+
+	public int getdelY() {
+		return delY;
+	}
+	
+
+	public void setX() {
+
+	}
+
+	public void setY() {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
