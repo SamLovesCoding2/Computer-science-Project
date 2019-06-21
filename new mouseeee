@@ -1,0 +1,87 @@
+package ScifiGame;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class MouseInput implements MouseListener {
+
+	private Handler handler;
+	private int curX;
+	private int curY;
+	private float delX;
+	private float delY;
+	private int newX;
+	private int newY;
+	private GameObject player;
+	private PlayerBullet b;
+	private float velo = 3;
+
+	public MouseInput(Handler handler) {
+		this.handler = handler;
+
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		newX = e.getLocationOnScreen().x;
+		newY = e.getLocationOnScreen().y;
+//		for (int i = 0; i < handler.object.size(); i++) {
+//
+//			GameObject tempObject = handler.object.get(i);
+//			if (tempObject.getId() == ID.PlayerBullet) {
+//				curX = (int) tempObject.getX();
+//				curY = (int) tempObject.getY();
+//			}
+//		}
+		
+		
+		float slope = (newY - player.getY())/(newX - player.getX());
+		float angle = (float) Math.atan(slope);
+		delX = (float) (velo * Math.cos(angle));
+		delY = (float) (velo * Math.sin(angle));
+		PlayerBullet p = new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler);
+		
+
+//		for (int i = 0; i < handler.object.size(); i++) {
+//			if (handler.object.get(i).getId() == ID.Player)
+//				player = handler.object.get(i);
+//		}
+
+		
+		handler.addObject(p);
+//		for (int i = 0; i < handler.object.size(); i++) {
+//
+//			GameObject tempObject = handler.object.get(i);
+//
+//			if (tempObject.getId() == ID.PlayerBullet) {
+//				tempObject.setX(curX + delX);
+//				tempObject.setY(curY + delY);
+////				for (int j = curX; j <= newX; j++) {
+////					tempObject.setX(j);
+////				}
+//			}
+//
+//		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+}
