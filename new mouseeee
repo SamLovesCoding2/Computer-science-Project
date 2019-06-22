@@ -3,64 +3,43 @@ package ScifiGame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
+
 public class MouseInput implements MouseListener {
 
 	private Handler handler;
-	private int curX;
-	private int curY;
 	private float delX;
 	private float delY;
-	private int newX;
-	private int newY;
+	private float newX;
+	private float newY;
 	private GameObject player;
-	private PlayerBullet b;
 	private float velo = 3;
 
 	public MouseInput(Handler handler) {
 		this.handler = handler;
+		for(int i = 0; i< handler.object.size(); i++)
+		{// to get the ID of the current player
+			if(handler.object.get(i).getId() == ID.PlayerBullet) player = handler.object.get(i);
+		}
 
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		newX = e.getLocationOnScreen().x;
 		newY = e.getLocationOnScreen().y;
-//		for (int i = 0; i < handler.object.size(); i++) {
-//
-//			GameObject tempObject = handler.object.get(i);
-//			if (tempObject.getId() == ID.PlayerBullet) {
-//				curX = (int) tempObject.getX();
-//				curY = (int) tempObject.getY();
-//			}
-//		}
 		
 		
-		float slope = (newY - player.getY())/(newX - player.getX());
+		//float slope = (newY - player.getY())/(newX - player.getX());
+		float slope = newY/newX;
 		float angle = (float) Math.atan(slope);
+//		double angle = Math.atan2(newY - player.getY(), newX - player.getX());
 		delX = (float) (velo * Math.cos(angle));
 		delY = (float) (velo * Math.sin(angle));
-		PlayerBullet p = new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler);
-		
+		for(int i = 0; i< handler.object.size(); i++)
+		{// to get the ID of the current player
+			if(handler.object.get(i).getId() == ID.PlayerBullet) 	handler.addObject(new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler));
+		}
 
-//		for (int i = 0; i < handler.object.size(); i++) {
-//			if (handler.object.get(i).getId() == ID.Player)
-//				player = handler.object.get(i);
-//		}
-
-		
-		handler.addObject(p);
-//		for (int i = 0; i < handler.object.size(); i++) {
-//
-//			GameObject tempObject = handler.object.get(i);
-//
-//			if (tempObject.getId() == ID.PlayerBullet) {
-//				tempObject.setX(curX + delX);
-//				tempObject.setY(curY + delY);
-////				for (int j = curX; j <= newX; j++) {
-////					tempObject.setX(j);
-////				}
-//			}
-//
-//		}
 	}
 
 	@Override
@@ -77,6 +56,21 @@ public class MouseInput implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		newX = e.getLocationOnScreen().x;
+		newY = e.getLocationOnScreen().y;
+		
+		
+		//float slope = (newY - player.getY())/(newX - player.getX());
+		float slope = newY/newX;
+		float angle = (float) Math.atan(slope);
+//		double angle = Math.atan2(newY - player.getY(), newX - player.getX());
+		delX = (float) (velo * Math.cos(angle));
+		delY = (float) (velo * Math.sin(angle));
+		for(int i = 0; i< handler.object.size(); i++)
+		{// to get the ID of the current player
+			if(handler.object.get(i).getId() == ID.PlayerBullet) 	handler.addObject(new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler));
+		}
+	
 
 	}
 
@@ -84,4 +78,5 @@ public class MouseInput implements MouseListener {
 	public void mouseReleased(MouseEvent e) {
 
 	}
+
 }
