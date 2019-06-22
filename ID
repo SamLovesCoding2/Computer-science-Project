@@ -7,7 +7,7 @@ Trail(),
 FastEnemy(),
 SmartEnemy(),
 EnemyBoss(),
-
+PlayerBullet(),
 BasicEnemy();
 
 
