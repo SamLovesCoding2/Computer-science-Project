@@ -5,41 +5,110 @@ import java.awt.Graphics;
 
 import java.awt.Rectangle;
 
-
 public class PlayerBullet extends GameObject {
 	private Handler handler;
 	private int curX;
 	private int curY;
-
+//private GameObject PlayerBullet;
 	private float deltaX;
 	private float deltaY;
-
-	public PlayerBullet(int curX, int curY, float delX, float delY, ID id, Handler handler) {
-		super(curX, curY, id);
+	private int mouseX;
+	private int mouseY;
+	
+	public PlayerBullet(int playerX, int playerY, int mouseX, int mouseY, float delX, float delY, ID id, Handler handler) {
+		super(playerX, playerY, id);
 		this.handler = handler;
 
-		this.curX = curX;
-		this.curY = curY;
-		
+		this.curX = playerX;
+		this.curY = playerY;
+		System.out.println("x: " + delX);
+		System.out.println("y: " + delY);
 		this.deltaX = delX;
 		this.deltaY = delY;
-		
+
+		this.mouseX = mouseX;
+		this.mouseY = mouseY;
 
 	}
 
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, 5, 5);
-
 	}
 
 	public void tick() {
+		if (curX <= mouseX && curY >= mouseY) {
+			x += deltaX;
+			y -= deltaY;
+		} else if (curX <= mouseX && curY <= mouseY) {
+			x += deltaX;
+			y += deltaY;
+		} else if (curX >= mouseX && curY >= mouseY) {
+			x -= deltaX;
+			y -= deltaY;
+		} else {
+			x -= deltaX;
+			y += deltaY;
+		}
+		for(int i = 0;i< handler.object.size();i++)
+		{
+			GameObject tempObject = handler.object.get(i);
+			if(tempObject.getId() == ID.BasicEnemy)
+			{
+				if(getBounds().intersects(tempObject.getBounds()))
+				{
+					handler.removeObject(this);
+					handler.removeObject(tempObject);
+				}
+			}
+			if(tempObject.getId() == ID.FastEnemy)
+			{
+				if(getBounds().intersects(tempObject.getBounds()))
+				{
+					handler.removeObject(tempObject);;
+				}
+			}
+			if(tempObject.getId() == ID.SmartEnemy)
+			{
+				if(getBounds().intersects(tempObject.getBounds()))
+				{
+					handler.removeObject(tempObject);
+				}
+			}
+		}
 
-	//	MouseInput i = new MouseInput(handler);
-		this.curX += deltaX;
-		this.curY += deltaY;
+//		if(curX >= mouseX-112 && curY >= mouseY+ 9) // mouse is left and above player
+//		{
+//			x -= deltaX;
+//			y += deltaY;
+//		} 
+//		if (curX >= mouseX-112 && curY < mouseY+ 9) // mouse is left and below
+//		{
+//			x -= deltaX;
+//			y -= deltaY;
+//		} 
+//		if (curX >= mouseX-112 && curY > mouseY+ 9) // mouse is right and above
+//		{
+//			x += deltaX;
+//			y += deltaY;
+//		} 
+//		if (curX >= mouseX-112 && curY < mouseY+ 9) // mouse is right and below
+//		{
+//			x += deltaX;
+//			y -= deltaY;
+//		}
 
 
-		//handler.addObject(new PlayerBullet((int) x + 10, (int) y + 10, deltaX, deltaY, ID.PlayerBullet, handler));
+//		x += deltaX;
+//		y += deltaY;
+
+
+		if (this.curY >= Game.HEIGHT)
+			handler.removeObject(this);
+		if (this.curX >= Game.WIDTH)
+			handler.removeObject(this);
+
+		// handler.addObject(new PlayerBullet((int) x + 10, (int) y + 10, deltaX,
+		// deltaY, ID.PlayerBullet, handler));
 
 //	if(y <= 0|| y >= Game.HEIGHT - 32) velY *= -1;
 //		if (x <= 0 || x >= Game.WIDTH - 96)
@@ -59,6 +128,6 @@ public class PlayerBullet extends GameObject {
 
 	public void render(Graphics g) {
 		g.setColor(Color.ORANGE);
-		g.fillRect((int)x,(int)y,16,16);
+		g.fillRect((int) x, (int) y, 16, 16);
 	}
 }
