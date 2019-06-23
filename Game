@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	private HUD hud;
 	private Spawn spawner;
+	private PlayerBullet p;
 
 //a switch to change between Menu and Game
 	public enum STATE {
@@ -34,21 +35,23 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		
-		this.addMouseListener(new MouseInput(handler));
+		
 		new Window(WIDTH, HEIGHT, "let's build a game!", this);
 
 		hud = new HUD();
 		spawner = new Spawn(handler, hud);
 		r = new Random();
+		
 		// initialize the game
 		if (gameState == STATE.Game) {
 			handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-			handler.addObject(
-					new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
+//			handler.addObject(
+//					new BasicEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.BasicEnemy, handler));
 		}
+		this.addMouseListener(new MouseInput(handler));
 
 	}
-//method is to making sure the running process is unthreatened;
+
 	public synchronized void start() {
 		thread = new Thread(this);
 		thread.start();
@@ -103,7 +106,9 @@ public class Game extends Canvas implements Runnable {
 			spawner.tick();
 		}
 		hud.tick();
+
 		spawner.tick();
+
 	}
 //graphics
 	private void render() {
@@ -121,11 +126,32 @@ public class Game extends Canvas implements Runnable {
 
 		if (gameState == STATE.Game) {
 			hud.render(g);
+
 		} else {
 			g.setColor(Color.white);
 			g.drawString("Menu", 100, 100);
 		}
+		
+if(hud.getLevel() == 20)
+{
+	g.drawString("you win!", 20, 21);
+	g.drawString("you win!", 20, 41);
+	g.drawString("you win!", 20, 61);
+	g.drawString("you win!", 20, 81);
+	g.drawString("you win!", 20, 101);
+	g.drawString("you win!", 20, 121);
+	g.drawString("you win!", 20, 141);
+	g.drawString("you win!", 20, 161);
+	g.drawString("you win!", 20, 181);
+	g.drawString("you win!", 20, 201);
+	g.drawString("you win!", 20, 221);
 
+	
+	}
+if(hud.getLevel() == 22)
+{
+	System.exit(1);
+	}
 		g.dispose();
 		bs.show();
 	}
