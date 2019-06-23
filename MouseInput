@@ -3,8 +3,6 @@ package ScifiGame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
-
 public class MouseInput implements MouseListener {
 
 	private Handler handler;
@@ -13,33 +11,64 @@ public class MouseInput implements MouseListener {
 	private float newX;
 	private float newY;
 	private GameObject player;
-	private float velo = 3;
+
+	private float velo = 10;
 
 	public MouseInput(Handler handler) {
 		this.handler = handler;
-		for(int i = 0; i< handler.object.size(); i++)
-		{// to get the ID of the current player
-			if(handler.object.get(i).getId() == ID.PlayerBullet) player = handler.object.get(i);
+		for (int i = 0; i < handler.object.size(); i++) {// to get the ID of the current player
+			if (handler.object.get(i).getId() == ID.Player) {
+				player = handler.object.get(i);
+			}
 		}
 
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		newX = e.getLocationOnScreen().x;
-		newY = e.getLocationOnScreen().y;
-		
-		
-		//float slope = (newY - player.getY())/(newX - player.getX());
-		float slope = newY/newX;
-		float angle = (float) Math.atan(slope);
-//		double angle = Math.atan2(newY - player.getY(), newX - player.getX());
-		delX = (float) (velo * Math.cos(angle));
-		delY = (float) (velo * Math.sin(angle));
-		for(int i = 0; i< handler.object.size(); i++)
-		{// to get the ID of the current player
-			if(handler.object.get(i).getId() == ID.PlayerBullet) 	handler.addObject(new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler));
+//		newX = e.getXOnScreen();
+//		newY = e.getYOnScreen();
+		newX = e.getPoint().x;
+		newY = e.getPoint().y;
+//		newX = 0;
+//		newY = 0;
+
+//		System.out.println(newX);
+////		System.out.println(newY);
+//		System.out.println(player.getX());
+//		System.out.println(player.getY());
+
+		// float slope = newY - player.getY() newX - player.getX();
+		float angle = (float) Math.atan2(newY - player.getY(), newX - player.getX());
+
+//		float angle = (float) Math.atan2(newY - player.getY(), newX - player.getX());
+//		float angle = (float) Math.atan((newY - player.getY()) / (newX - player.getX()));
+//		System.out.println(angle);
+
+//		delX = (float) (velo * Math.cos(180 - Math.toDegrees(angle)));
+		delX = (float) Math.abs(velo * Math.cos(Math.PI - angle));
+		delY = (float) Math.abs(velo * Math.sin(Math.PI - angle));
+
+//		delY = -(float) (velo * Math.sin(180 - Math.toDegrees(angle)));
+//		System.out.println("delX" + delX);
+//		System.out.println("delY" + delY);
+//		delX = -10;
+//		delY = 10;
+
+		for (int i = 0; i < handler.object.size(); i++) {// to get the ID of the current player
+			if (handler.object.get(i).getId() == ID.Player)
+				player = handler.object.get(i);
 		}
 
+		int curX = (int) player.getX();
+		int curY = (int) player.getY();
+
+	
+			PlayerBullet p = new PlayerBullet(curX, curY, Math.round(newX), Math.round(newY), delX, delY,
+					ID.PlayerBullet, handler);
+			handler.addObject(p);
+	
+			
+		
 	}
 
 	@Override
@@ -56,21 +85,6 @@ public class MouseInput implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		newX = e.getLocationOnScreen().x;
-		newY = e.getLocationOnScreen().y;
-		
-		
-		//float slope = (newY - player.getY())/(newX - player.getX());
-		float slope = newY/newX;
-		float angle = (float) Math.atan(slope);
-//		double angle = Math.atan2(newY - player.getY(), newX - player.getX());
-		delX = (float) (velo * Math.cos(angle));
-		delY = (float) (velo * Math.sin(angle));
-		for(int i = 0; i< handler.object.size(); i++)
-		{// to get the ID of the current player
-			if(handler.object.get(i).getId() == ID.PlayerBullet) 	handler.addObject(new PlayerBullet((int) player.getX() + 10, (int) player.getY() + 10, delX, delY, ID.PlayerBullet, handler));
-		}
-	
 
 	}
 
