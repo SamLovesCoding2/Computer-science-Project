@@ -61,8 +61,6 @@ public class Spawn {
 				handler.clearEnemys();
 				handler.addObject(
 						new EnemyBoss((Game.WIDTH/2), -120, ID.EnemyBoss, handler));
-				handler.addObject(
-						new EnemyBoss((Game.WIDTH/2), -120, ID.SmartEnemy, handler));
 				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
 						handler));
 				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
@@ -73,9 +71,20 @@ public class Spawn {
 			}
 			else if(hud.getLevel() == 15)
 			{
-				handler.addObject(
-						new EnemyBoss((Game.WIDTH/2), -120, ID.EnemyBoss, handler));
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
+						handler));
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
+						handler));
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
+						handler));
+				handler.addObject(new SmartEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.SmartEnemy,
+						handler));
 			}
+			else if(hud.getLevel() == 16)
+			{
+				handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.FastEnemy, handler));handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.FastEnemy, handler));handler.addObject(new FastEnemy(r.nextInt(Game.WIDTH - 50), r.nextInt(Game.HEIGHT - 50), ID.FastEnemy, handler));
+			}
+			
 	}
 	}
 
