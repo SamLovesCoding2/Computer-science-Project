@@ -11,8 +11,8 @@ public class FastEnemy extends GameObject {
 	{
 		super(x,y,id);
 		this.handler = handler;
-		velX = 2;
-		velY = 9;
+		velX = 14;
+		velY = 14;
 	}
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, 16, 16);
