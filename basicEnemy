@@ -21,10 +21,10 @@ public void tick()
 {
 	x += velX;
 	y += velY;
-	
+	// once the object touches the boundary, it will bound back.
 	if(y <= 0|| y >= Game.HEIGHT - 32) velY *= -1;
 	if(x <= 0|| x >= Game.WIDTH - 16) velX *= -1;
-	
+	//for visual effect, add a little tail to the object
 	handler.addObject(new Trail((int)x,(int)y,ID.Trail,Color.red,16,16,handler,0.02f));
 }
 public void render(Graphics g) {
