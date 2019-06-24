@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class EnemyBoss extends GameObject {
 	private Handler handler;
+	
 	private int timer = 36;
 	private int timer2 = 50;
 	Random r = new Random();
@@ -26,6 +27,8 @@ public class EnemyBoss extends GameObject {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		// the longer the timer is, the longer the distance an object goes, this is a different way of showing locomotion.
 		if (timer <= 0) velY = 0;
 		else timer--;
 		
@@ -41,6 +44,8 @@ public class EnemyBoss extends GameObject {
 			
 			
 			int spawn = r.nextInt(10);
+			
+			//making sure all the bullets are created from the center of the enemy boss
 			if (spawn == 0)	handler.addObject(new EnemyBossBullet((int) x +48, (int) y+48, ID.BasicEnemy, handler));
 
 			
