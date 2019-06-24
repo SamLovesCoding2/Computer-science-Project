@@ -33,12 +33,12 @@ public abstract class GameObject {
 		return id;
 	}
 
-	public void setX(int x) {
-		this.velX = x;
+	public void setX(float newX) {
+		this.x = newX;
 	}
 
-	public void setY(int y) {
-		this.velY = y;
+	public void setY(float newY) {
+		this.y = newY;
 	}
 
 	public void setID(ID id) {
