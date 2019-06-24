@@ -43,7 +43,7 @@ collision();
 			{
 				if(getBounds().intersects(tempObject.getBounds()))
 				{
-					HUD.HEALTH -= 3;
+					HUD.HEALTH -= 1;
 				}
 			}
 		}
