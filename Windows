@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package rect2;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+/**
+ *
+ * @author LUPEI20
+ */
+public class Windows {
+    private static int x = 0;
+    private static int y = 0;
+    private static int width = 0;
+    private static int height = 0;
+    private static int zOrder = 0;
+    private static Color c;
+
+
+    
+
+
+    public Windows(int x,int y,int width, int height, Color color)
+    {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.c = color;
+   
+    }
+    public void drawRect(Graphics g)
+    {
+      // g.drawRect(x, y, width, height);
+        g.setColor(c);
+        g.fillRect(x, y, width, height);
+    }
+
+}
